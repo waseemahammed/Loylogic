@@ -11,7 +11,8 @@ CloudFormation teamplate for :
   - Created Public and Private subnets with route tables attached.
  
 **- Public server provisioning
-**  - Provisions EC2 in public subnet.
+**  
+  - Provisions EC2 in public subnet.
   - Installs chef and Jenkins.
   - Jenkins installation is made with this repo : 
 
@@ -27,19 +28,21 @@ CloudFormation teamplate for :
 - Push image to docker hub.
 - Deploy to Ec2 using CFN.
 
-![image](https://user-images.githubusercontent.com/23531917/115952547-27bbbf80-a504-11eb-9568-a4afa1585353.png) : https://github.com/waseemahammed/Loylogic/blob/main/Dockerfile
+**Dockerfile** : https://github.com/waseemahammed/Loylogic/blob/main/Dockerfile
 
 **Chef-repo** : https://github.com/waseemahammed/Loylogic/tree/main/chef-repo/loylogic-deployment
 
 **Chef execution for docker container deployment : 
-** - executes chef-solo (since no environment for chef-server setup).
+** 
+ - executes chef-solo (since no environment for chef-server setup).
  - Installs docker
  - Deploys docker container with docker hub image which is pushed after code build and docker build.
  - Deployment of docker container with custom tag support using environment and override attributes.
 
 
 **Jenkins build : 
-**![image](https://user-images.githubusercontent.com/23531917/115952449-96e4e400-a503-11eb-80e9-d3b854cdc8e3.png)
+**
+![image](https://user-images.githubusercontent.com/23531917/115952449-96e4e400-a503-11eb-80e9-d3b854cdc8e3.png)
 
 ![image](https://user-images.githubusercontent.com/23531917/115952464-b0862b80-a503-11eb-80b9-197e79ed4e53.png)
 

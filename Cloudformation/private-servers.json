@@ -1,0 +1,169 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Parameters": {
+		"InstanceType": {
+			"Description": "EC2 instance type",
+			"Type": "String",
+			"Default": "m5.large",
+			"AllowedValues": [
+				"c4.4xlarge",
+				"c5.large",
+				"c5.xlarge",
+				"c5.2xlarge",
+				"c5n.large",
+				"c5n.xlarge",
+				"c5n.2xlarge",
+				"c4.large",
+				"c4.xlarge",
+				"m5.large",
+				"m5.xlarge",
+				"m5.2xlarge",
+				"m5.4xlarge",
+				"m5.8xlarge"
+			],
+			"ConstraintDescription": "Please choose a valid instance type."
+		},
+		"AMIID": {
+			"Type": "String",
+			"Description": "AMI_ID in the desired environment",
+			"Default": "ami-123452685"
+		},
+		"KeyName": {
+			"Type": "AWS::EC2::KeyPair::KeyName",
+			"Description": "Name of an existing EC2 KeyPair to enable SSH access to the ECS instances."
+		},
+		"IAMInstanceProfileRole": {
+			"Type": "String",
+			"Default": "JenkinsRole",
+			"Description": "IAM Instance Profile Role to be attached on INSTANCE"
+		},
+		"DesiredCapacity": {
+			"Type": "Number",
+			"Default": "1",
+			"Description": "Number of instances to launch in your ASG."
+		},
+		"MaxCapacity": {
+			"Type": "Number",
+			"Default": "1",
+			"Description": "Maximum number of instances that can be launched in your ASG."
+		},
+		"MinCapacity": {
+			"Type": "Number",
+			"Default": "1",
+			"Description": "Minimum number of instances that can be launched in your ASG."
+		},
+		"DockerTag": {
+			"Type": "String",
+			"Default": "latest",
+			"Description": "Docker image tag to deploy."
+		}
+	},
+	"Resources": {
+		"PrivateEc2SecurityGroup": {
+			"Type": "AWS::EC2::SecurityGroup",
+			"Properties": {
+				"GroupDescription": "Security Group for Public Servers",
+				"GroupName": "public-ec2-sg",
+				"VpcId": {
+                    "Fn::ImportValue": {
+						"Fn::Sub": "${ImportStack}-LoylogicVPC"
+					}
+				},
+				"SecurityGroupIngress": [{
+						"IpProtocol": "tcp",
+						"FromPort": 80,
+						"ToPort": 80,
+						"CidrIp": "0.0.0.0/0",
+						"Description": "HTTP Traffic"
+					},
+					{
+						"IpProtocol": "tcp",
+						"FromPort": 443,
+						"ToPort": 443,
+						"CidrIp": "0.0.0.0/0",
+						"Description": "HTTPS Traffic"
+					}
+				],
+				"SecurityGroupEgress": [{
+					"IpProtocol": "-1",
+					"CidrIp": "0.0.0.0/0"
+				}]
+			}
+		},
+		"PrivateEc2LaunchTemplate": {
+			"Type": "AWS::EC2::LaunchTemplate",
+			"Properties": {
+				"LaunchTemplateName": "PrivateEC2-LT",
+				"LaunchTemplateData": {		
+					"ImageId": {
+						"Ref": "AMIID"
+					},
+					"InstanceType": {
+						"Ref": "InstanceType"
+					},
+					"KeyName": {
+						"Ref": "KeyName"
+					},
+					"IamInstanceProfile": {
+						"Name": {
+							"Ref": "IAMInstanceProfileRole"
+						}
+					},
+					"SecurityGroupIds": [{
+						"Ref": "PublicEc2SecurityGroup"
+					}],
+					"UserData": {
+						"Fn::Base64": {
+							"Fn::Join": [
+								"",
+								[
+									"#!/bin/bash -xe\n",
+									"wget https://packages.chef.io/files/stable/chefdk/4.5.0/el/8/chefdk-4.5.0-1.el7.x86_64.rpm\n",
+									"sudo rpm -ivh chefdk-4.5.0-1.el7.x86_64.rpm\n",
+									"yum apt update && apt install git -y\n",
+									"git clone https://github.com/waseemahammed/jenkins-automation.git\n",
+									"cd jenkins-automation\n",
+									"sudo chef-solo -c /home/ec2-user/chef-repo/solo.rb -j /home/ec2-user/chef-repo/node.rb --chef-license accept-silent\n"
+								]
+							]
+						}
+					}
+				}
+			}
+		},
+		"PrivateASG": {
+			"Type": "AWS::AutoScaling::AutoScalingGroup",
+			"Properties": {
+				"VPCZoneIdentifier": {
+					"Fn::ImportValue": {
+						"Fn::Sub": "${ImportStack}-LoylogicPrivateSubnet"
+					}
+				},
+				"LaunchTemplate": {
+					"LaunchTemplateId": {
+						"Ref": "PrivateEc2LaunchTemplate"
+					}
+				},
+				"MinSize": {
+					"Ref": "MinCapacity"
+				},
+				"MaxSize": {
+					"Ref": "MaxCapacity"
+				},
+				"DesiredCapacity": {
+					"Ref": "DesiredCapacity"
+				},
+			"CreationPolicy": {
+				"ResourceSignal": {
+					"Timeout": "PT15M"
+				}
+			},
+			"UpdatePolicy": {
+				"AutoScalingReplacingUpdate": {
+					"WillReplace": "true"
+				}
+			}
+		}
+	}
+}
+}

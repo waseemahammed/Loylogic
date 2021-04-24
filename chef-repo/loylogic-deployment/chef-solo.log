@@ -1,0 +1,83 @@
+# Logfile created on 2021-04-24 02:09:19 +0530 by logger.rb/56815
+[2021-04-24T02:09:20+05:30] INFO: Started chef-zero at chefzero://localhost:1 with repository at C:/Users/wahammed/Documents/OldPC-D Drive/GCE/SCM/Poc/Loylogic/chef-repo/loylogic-deployment
+  One version per cookbook
+
+[2021-04-24T02:09:20+05:30] INFO: *** Chef 13.8.5 ***
+[2021-04-24T02:09:20+05:30] INFO: Platform: x64-mingw32
+[2021-04-24T02:09:20+05:30] INFO: Chef-client pid: 33148
+[2021-04-24T02:09:20+05:30] INFO: The plugin path C:\chef\ohai\plugins does not exist. Skipping...
+[2021-04-24T02:10:09+05:30] INFO: Setting the run_list to ["recipe[loylogic-deployment]"] from CLI options
+[2021-04-24T02:10:09+05:30] INFO: Run List is [recipe[loylogic-deployment]]
+[2021-04-24T02:10:09+05:30] INFO: Run List expands to [loylogic-deployment]
+[2021-04-24T02:10:09+05:30] INFO: Starting Chef Run for TAVLAPT258.internal.tavisca.com
+[2021-04-24T02:10:09+05:30] INFO: Running start handlers
+[2021-04-24T02:10:09+05:30] INFO: Start handlers complete.
+[2021-04-24T02:10:09+05:30] ERROR: Running exception handlers
+[2021-04-24T02:10:09+05:30] ERROR: Exception handlers complete
+[2021-04-24T02:10:09+05:30] FATAL: Stacktrace dumped to C:/Users/wahammed/Documents/OldPC-D Drive/GCE/SCM/Poc/Loylogic/chef-repo/loylogic-deployment/.chef/cache/chef-stacktrace.out
+[2021-04-24T02:10:09+05:30] FATAL: Please provide the contents of the stacktrace.out file if you file a bug report
+[2021-04-24T02:10:09+05:30] FATAL: Net::HTTPServerException: 412 "Precondition Failed"
+[2021-04-24T02:13:32+05:30] INFO: Started chef-zero at chefzero://localhost:1 with repository at C:/Users/wahammed/Documents/OldPC-D Drive/GCE/SCM/Poc/Loylogic/chef-repo/loylogic-deployment
+  One version per cookbook
+
+[2021-04-24T02:13:33+05:30] INFO: *** Chef 13.8.5 ***
+[2021-04-24T02:13:33+05:30] INFO: Platform: x64-mingw32
+[2021-04-24T02:13:33+05:30] INFO: Chef-client pid: 14492
+[2021-04-24T02:13:33+05:30] INFO: The plugin path C:\chef\ohai\plugins does not exist. Skipping...
+[2021-04-24T02:13:57+05:30] INFO: Setting the run_list to ["recipe[loylogic-deployment]"] from CLI options
+[2021-04-24T02:13:57+05:30] INFO: Run List is [recipe[loylogic-deployment]]
+[2021-04-24T02:13:57+05:30] INFO: Run List expands to [loylogic-deployment]
+[2021-04-24T02:13:57+05:30] INFO: Starting Chef Run for TAVLAPT258.internal.tavisca.com
+[2021-04-24T02:13:57+05:30] INFO: Running start handlers
+[2021-04-24T02:13:57+05:30] INFO: Start handlers complete.
+[2021-04-24T02:13:58+05:30] INFO: Loading cookbooks [chef-repo@0.1.0, docker@7.7.0]
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/chef-repo/Berksfile in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/chef-repo/recipes/deployment.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/chef-repo/recipes/default.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/chef-repo/metadata.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/chefignore in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/CHANGELOG.md in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/kitchen.dokken.yml in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_base.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_container.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/docker-7.7.0.tar in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_exec.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_image.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_image_prune.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_installation_script.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_installation_package.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_installation_tarball.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_network.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_plugin.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_registry.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_service.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_service_base.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_service_manager_execute.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_service_manager_systemd.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_service_manager_sysvinit_rhel.rb in the cache.
+[2021-04-24T02:13:58+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_service_manager_sysvinit_debian.rb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_service_manager_upstart.rb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_tag.rb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/libraries/docker_volume.rb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/metadata.json in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/libraries/helpers_service.rb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/metadata.rb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/LICENSE in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/templates/default/default/docker-wait-ready.erb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/README.md in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/templates/default/default/docker.erb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/templates/default/systemd/containerd.service.erb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/templates/default/sysconfig/docker.erb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/templates/default/systemd/docker.service-override.erb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/templates/default/systemd/docker.socket-override.erb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/templates/default/systemd/docker.service.erb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/templates/default/systemd/docker.socket.erb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/templates/default/systemd/tmpfiles.d.conf.erb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/templates/default/sysvinit/docker-debian.erb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/templates/default/sysvinit/docker-rhel.erb in the cache.
+[2021-04-24T02:13:59+05:30] INFO: Storing updated cookbooks/docker/templates/default/upstart/docker.conf.erb in the cache.
+[2021-04-24T02:13:59+05:30] ERROR: Running exception handlers
+[2021-04-24T02:13:59+05:30] ERROR: Exception handlers complete
+[2021-04-24T02:13:59+05:30] FATAL: Stacktrace dumped to C:/Users/wahammed/Documents/OldPC-D Drive/GCE/SCM/Poc/Loylogic/chef-repo/loylogic-deployment/.chef/cache/chef-stacktrace.out
+[2021-04-24T02:13:59+05:30] FATAL: Please provide the contents of the stacktrace.out file if you file a bug report
+[2021-04-24T02:13:59+05:30] FATAL: Chef::Exceptions::CookbookChefVersionMismatch: Cookbook 'docker' version '7.7.0' depends on chef version [">= 15.0"], but the running chef version is 13.8.5

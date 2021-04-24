@@ -1,0 +1,215 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "CidrBlock": {
+            "Type": "String",
+            "Default": "172.20.0.0/16",
+            "Description": "Cidr Block for VPC."
+        },
+        "PrivateCidrBlock": {
+            "Type": "String",
+            "Default": "172.20.20.0/24",
+            "Description": "Cidr Block for Private Subnet."
+        },
+        "PublicCidrBlock": {
+            "Type": "String",
+            "Default": "172.20.10.0/24",
+            "Description": "Cidr Block for Public Subnet."
+        }
+    },
+    "Resources": {
+        "LoylogicVPC": {
+            "Type": "AWS::EC2::VPC",
+            "Properties": {
+                "CidrBlock": {
+                    "Ref": "CidrBlock"
+                },
+                "EnableDnsSupport": "false",
+                "EnableDnsHostnames": "false",
+                "InstanceTenancy": "dedicated",
+                "Tags": [
+                    {
+                        "Key": "Project",
+                        "Value": "Loylogic"
+                    }
+                ]
+            }
+        },
+        "LoylogicIGW": {
+            "Type": "AWS::EC2::InternetGateway",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Project",
+                        "Value": "Loylogic"
+                    }
+                ]
+            }
+        },
+        "AttachIGGatewaytoVPC": {
+            "Type": "AWS::EC2::VPCGatewayAttachment",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "LoylogicVPC"
+                },
+                "InternetGatewayId": {
+                    "Ref": "LoylogicIGW"
+                }
+            }
+        },
+        "LoylogicPrivateSubnet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "LoylogicVPC"
+                },
+                "CidrBlock": {
+                    "Ref": "PrivateCidrBlock"
+                },
+                "AvailabilityZone": "us-east-1a",
+                "MapPublicIpOnLaunch": "false",
+                "Tags": [
+                    {
+                        "Key": "Project",
+                        "Value": "Loylogic"
+                    }
+                ]
+            }
+        },
+        "LoylogicPublicSubnet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "LoylogicVPC"
+                },
+                "CidrBlock": {
+                    "Ref": "PublicCidrBlock"
+                },
+                "AvailabilityZone": "us-east-1a",
+                "MapPublicIpOnLaunch": "true",
+                "Tags": [
+                    {
+                        "Key": "Project",
+                        "Value": "Loylogic"
+                    }
+                ]
+            }
+        },
+        "NatGWEIP": {
+            "Type": "AWS::EC2::EIP",
+            "DependsOn" : "AttachIGGatewaytoVPC",
+            "Properties": {
+                "Domain": "vpc"
+            }
+        },
+        "NATGW": {
+            "Type": "AWS::EC2::NatGateway",
+            "Properties": {
+                "AllocationId": {
+                    "Fn::GetAtt": [
+                        "NatGWEIP",
+                        "AllocationId"
+                    ]
+                },
+                "SubnetId": {
+                    "Ref": "LoylogicPublicSubnet"
+                }
+            }
+        },
+        "PublicRouteTable": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "LoylogicVPC"
+                }
+            }
+        },
+        "DefaultPublicRoute": {
+            "Type": "AWS::EC2::Route",
+            "DependsOn" : "AttachIGGatewaytoVPC",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "PublicRouteTable"
+                },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "LoylogicIGW"
+                }
+            }
+        },
+        "PublicRouteTableAssociation": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "LoylogicPublicSubnet"
+                },
+                "RouteTableId": {
+                    "Ref": "PublicRouteTable"
+                }
+            }
+        },
+        "PrivateRouteTable": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "LoylogicVPC"
+                }
+            }
+        },
+        "DefaultPrivateRoute": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "PublicRouteTable"
+                },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "NatGatewayId": {
+                    "Ref": "NATGW"
+                }
+            }
+        },
+        "PrivateRouteTableAssociation": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "LoylogicPrivateSubnet"
+                },
+                "RouteTableId": {
+                    "Ref": "PrivateRouteTable"
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "LoylogicVPC": {
+            "Value": {
+                "Ref": "LoylogicVPC"
+            },
+            "Export": {
+                "Name": {
+                    "Fn::Sub": "${AWS::StackName}-LoylogicVPC"
+                }
+            }
+        },
+        "LoylogicPrivateSubnet": {
+            "Value": {
+                "Ref": "LoylogicPrivateSubnet"
+            },
+            "Export": {
+                "Name": {
+                    "Fn::Sub": "${AWS::StackName}-LoylogicPrivateSubnet"
+                }
+            }
+        },
+        "LoylogicPublicSubnet": {
+            "Value": {
+                "Ref": "LoylogicPublicSubnet"
+            },
+            "Export": {
+                "Name": {
+                    "Fn::Sub": "${AWS::StackName}-LoylogicPublicSubnet"
+                }
+            }
+        }
+    }
+}

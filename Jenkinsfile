@@ -39,11 +39,11 @@ pipeline {
         }
         stage("Deploy to EC2"){
             environment {
+                CFN_STACK_NAME = "deployment-server-stack"
             }
             steps{
-                withAWS(role:'ng-gce-deployment-role', roleAccount:'006378141167', roleSessionName: 'CFN-dev-deployment-session') {
-                    sh "sed -i \"s/{{GIT_COMMIT}}/${env.GIT_COMMIT}/g\" ${env.GIT_COMMIT}/parameter.${params.Environment}.json"
-                    cfnUpdate(stack:"${env.CFN_STACK_NAME}", file:"${env.GIT_COMMIT}/${SERVICE_NAME}.json", paramsFile:"${env.GIT_COMMIT}/parameter.${params.Environment}.json")
+                withAWS(role:'role-name', roleAccount:'account-id', roleSessionName: 'CFN-deployment-session') {
+                    cfnUpdate(stack:"${env.CFN_STACK_NAME}", file:"Cloudformation/private-servers.json", paramsFile:"Cloudformation/private-servers-parameters.json")
                 }
             }
         }

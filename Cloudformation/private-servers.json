@@ -62,8 +62,8 @@
 		"PrivateEc2SecurityGroup": {
 			"Type": "AWS::EC2::SecurityGroup",
 			"Properties": {
-				"GroupDescription": "Security Group for Public Servers",
-				"GroupName": "public-ec2-sg",
+				"GroupDescription": "Security Group for Private Servers",
+				"GroupName": "private-ec2-sg",
 				"VpcId": {
                     "Fn::ImportValue": {
 						"Fn::Sub": "${ImportStack}-LoylogicVPC"
@@ -110,7 +110,7 @@
 						}
 					},
 					"SecurityGroupIds": [{
-						"Ref": "PublicEc2SecurityGroup"
+						"Ref": "PrivateEc2SecurityGroup"
 					}],
 					"UserData": {
 						"Fn::Base64": {
@@ -123,7 +123,7 @@
 									"yum apt update && apt install git -y\n",
 									"git clone https://github.com/waseemahammed/jenkins-automation.git\n",
 									"cd jenkins-automation\n",
-									"sed -i \"s/{{tag}}/${env.GIT_COMMIT}/g\" environments/deployments.json",
+									"sed -i \"s/{{tag}}/",{"Ref": "DockerTag"},"/g\" environments/deployments.json",
 									"sudo chef-solo -c /home/ec2-user/chef-repo/solo.rb -j /home/ec2-user/chef-repo/node.rb -E deployments--chef-license accept-silent\n"
 								]
 							]

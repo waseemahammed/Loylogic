@@ -1,0 +1,34 @@
+[
+  {
+    "ParameterKey": "InstanceType",
+    "ParameterValue": "t2.medium"
+  },
+  {
+    "ParameterKey": "AMIID",
+    "ParameterValue": "ami-0ffea00000f287d30"
+  },
+  {
+    "ParameterKey": "IAMInstanceProfileRole",
+    "ParameterValue": "application-server-role"
+  },
+  {
+    "ParameterKey": "DesiredCapacity",
+    "ParameterValue": "1"
+  },
+  {
+    "ParameterKey": "MaxCapacity",
+    "ParameterValue": "1"
+  },
+  {
+    "ParameterKey": "MinCapacity",
+    "ParameterValue": "1"
+  },
+  {
+    "ParameterKey": "KeyName",
+    "ParameterValue": "my-ssh-key"
+  },
+  {
+    "ParameterKey": "DockerTag",
+    "ParameterValue": "latest"
+  }
+]

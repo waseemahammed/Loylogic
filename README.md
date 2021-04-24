@@ -31,14 +31,14 @@ CloudFormation teamplate for :
 
 **Chef-repo** : https://github.com/waseemahammed/Loylogic/tree/main/chef-repo/loylogic-deployment
 
-**Chef execution for docker container deployment : ** 
+**Chef execution for docker container deployment :** 
  - executes chef-solo (since no environment for chef-server setup).
  - Installs docker
  - Deploys docker container with docker hub image which is pushed after code build and docker build.
  - Deployment of docker container with custom tag support using environment and override attributes.
 
 
-**Jenkins build : **
+**Jenkins build :**
 #1 : Jenkins
 ![image](https://user-images.githubusercontent.com/23531917/115952449-96e4e400-a503-11eb-80e9-d3b854cdc8e3.png)
 

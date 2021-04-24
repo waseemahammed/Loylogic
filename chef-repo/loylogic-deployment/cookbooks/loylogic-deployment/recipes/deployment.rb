@@ -1,6 +1,6 @@
 #
-# Cookbook:: chef-repo
-# Recipe:: default
+# Cookbook:: loylogic-deployment
+# Recipe:: deployment
 #
 # Copyright:: 2021, The Authors, All Rights Reserved.
 

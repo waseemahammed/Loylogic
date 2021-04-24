@@ -39,6 +39,7 @@ CloudFormation teamplate for :
 
 
 **Jenkins build :**
+
 #1 : Jenkins
 ![image](https://user-images.githubusercontent.com/23531917/115952449-96e4e400-a503-11eb-80e9-d3b854cdc8e3.png)
 
@@ -56,6 +57,7 @@ CloudFormation teamplate for :
 
 
 **Chef deployment output : **
+
 #1: docker container deployed
 ![image](https://user-images.githubusercontent.com/23531917/115952569-533eaa00-a504-11eb-970a-bbc281160451.png)
 
@@ -64,4 +66,5 @@ CloudFormation teamplate for :
 
 
 **Final output : **
+
 ![image](https://user-images.githubusercontent.com/23531917/115952542-1ecaee00-a504-11eb-9fb0-155c49df2168.png)

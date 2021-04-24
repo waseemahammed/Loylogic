@@ -11,3 +11,5 @@ target/*
 .vscode
 _site/
 .*
+chef-repo/loylogic-deployment/.*
+chef-repo/loylogic-deployment/*.log

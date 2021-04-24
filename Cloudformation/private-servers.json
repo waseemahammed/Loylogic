@@ -123,7 +123,8 @@
 									"yum apt update && apt install git -y\n",
 									"git clone https://github.com/waseemahammed/jenkins-automation.git\n",
 									"cd jenkins-automation\n",
-									"sudo chef-solo -c /home/ec2-user/chef-repo/solo.rb -j /home/ec2-user/chef-repo/node.rb --chef-license accept-silent\n"
+									"sed -i \"s/{{tag}}/${env.GIT_COMMIT}/g\" environments/deployments.json",
+									"sudo chef-solo -c /home/ec2-user/chef-repo/solo.rb -j /home/ec2-user/chef-repo/node.rb -E deployments--chef-license accept-silent\n"
 								]
 							]
 						}

@@ -4,11 +4,12 @@
 #
 # Copyright:: 2021, The Authors, All Rights Reserved.
 
-docker_image 'waseemahammed/loylogic' do
+docker_image "#{node['docker']['image']['repo']}" do
     action :pull
+    tag "#{node['docker']['image']['tag']}"
 end
   
-docker_container 'waseemahammed/loylogic' do
-    repo 'waseemahammed/loylogic'
-    port '80:8080'
+docker_container "#{node['docker']['container']['name']}" do
+    repo "#{node['docker']['image']['repo']}"
+    port "#{node['docker']['container']['host']['port']}:#{node['docker']['container']['container']['port']}"
 end

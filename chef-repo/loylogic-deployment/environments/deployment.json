@@ -1,0 +1,11 @@
+{
+	"name": "deployment",
+	"override_attributes": {
+
+		"docker": {
+			"image":{
+				"tag": "{{tag}}"
+			}
+		}
+	}
+}

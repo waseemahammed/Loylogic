@@ -55,8 +55,11 @@ CloudFormation teamplate for :
 #5: docker tag and push
 ![image](https://user-images.githubusercontent.com/23531917/115952493-df9c9d00-a503-11eb-93bf-e23494550794.png)
 
+#6 Docker hub
+![image](https://user-images.githubusercontent.com/23531917/115952841-02c84c00-a506-11eb-9742-09bffb7d3990.png)
 
-**Chef deployment output : **
+
+**Chef deployment output :**
 
 #1: docker container deployed
 ![image](https://user-images.githubusercontent.com/23531917/115952569-533eaa00-a504-11eb-970a-bbc281160451.png)

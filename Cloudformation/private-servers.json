@@ -121,10 +121,10 @@
 									"wget https://packages.chef.io/files/stable/chefdk/4.5.0/el/8/chefdk-4.5.0-1.el7.x86_64.rpm\n",
 									"sudo rpm -ivh chefdk-4.5.0-1.el7.x86_64.rpm\n",
 									"yum apt update && apt install git -y\n",
-									"git clone https://github.com/waseemahammed/jenkins-automation.git\n",
-									"cd jenkins-automation\n",
-									"sed -i \"s/{{tag}}/",{"Ref": "DockerTag"},"/g\" environments/deployments.json",
-									"sudo chef-solo -c /home/ec2-user/chef-repo/solo.rb -j /home/ec2-user/chef-repo/node.rb -E deployments--chef-license accept-silent\n"
+									"git clone https://github.com/waseemahammed/Loylogic.git\n",
+									"cd chef-repo/loylogic-deployment/\n",
+									"sed -i \"s/{{tag}}/",{"Ref": "DockerTag"},"/g\" environments/deployment.json",
+									"sudo chef-solo -c /home/ec2-user/chef-repo/solo.rb -j /home/ec2-user/chef-repo/node.rb -E deployment --chef-license accept-silent\n"
 								]
 							]
 						}

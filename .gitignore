@@ -11,5 +11,6 @@ target/*
 .vscode
 _site/
 .*
+.gitignore
 chef-repo/loylogic-deployment/.*
 chef-repo/loylogic-deployment/*.log
